@@ -3,13 +3,14 @@ import UserCard from '../components/molecules/UserCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { IUser } from '../models/IUser'
 import { ReducerType } from '../store';
-import { fetchGetAllUsers } from '../store/features/userSlice';
+import { fetchGetAllUsers, setIndexUser } from '../store/features/userSlice';
 
 
 
 function User() {
     const dispatch = useDispatch<ReducerType>();
     const users:IUser[] = useSelector((state: any) => state.user.userList);
+    
     
 
     useEffect(() => {
@@ -22,7 +23,7 @@ function User() {
     <div className="container">
         <div className="row">
             <div className="col">
-                <input  type="text" className="form-control" placeholder='İşaretlenecek İndex Numarası' />
+                <input onChange={(evt) => dispatch(setIndexUser(parseInt(evt.target.value)))} type="text" className="form-control" placeholder='İşaretlenecek İndex Numarası' />
             </div>
         </div>
         <div className="row">
